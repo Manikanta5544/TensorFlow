@@ -15,14 +15,11 @@ const TOKEN_KEY = "talentflow_token";
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(() => !!localStorage.getItem(TOKEN_KEY));
 
   useEffect(() => {
     const token = localStorage.getItem(TOKEN_KEY);
-    if (!token) {
-      setIsLoading(false);
-      return;
-    }
+    if (!token) return;
     apiClient
       .get<ApiEnvelope<User>>("/auth/me")
       .then((res) => setUser(res.data.data))
