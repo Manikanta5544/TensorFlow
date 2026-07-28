@@ -5,7 +5,6 @@ from src.auth.domain.entities import User
 
 
 class UserRepository(ABC):
-
     @abstractmethod
     def get_by_id(self, user_id: UUID) -> User | None: ...
 

@@ -10,7 +10,6 @@ from src.ai.domain import entities as ai_entities  # noqa: F401
 from src.applications.domain import entities as applications_entities  # noqa: F401
 from src.auth.domain import entities as auth_entities  # noqa: F401
 from src.jobs.domain import entities as jobs_entities  # noqa: F401
-
 from src.shared.config.settings import get_settings
 from src.shared.database.session import Base
 

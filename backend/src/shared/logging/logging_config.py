@@ -8,7 +8,6 @@ from src.shared.middleware.request_context import get_request_id
 
 
 class JSONFormatter(logging.Formatter):
-
     def format(self, record: logging.LogRecord) -> str:
         payload = {
             "timestamp": datetime.now(UTC).isoformat(),

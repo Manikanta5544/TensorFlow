@@ -5,7 +5,6 @@ from sqlalchemy.dialects.postgresql import UUID as PG_UUID
 
 
 class PortableUUID(TypeDecorator):
-
     impl = CHAR
     cache_ok = True
 

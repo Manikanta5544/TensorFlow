@@ -1,0 +1,64 @@
+# Render Blueprint (Infrastructure as Code)
+# Import this repository into Render using "New -> Blueprint".
+# The remaining secrets (DATABASE_URL, JWT_SECRET_KEY, AI_API_KEY,
+# CORS_ORIGINS) should be configured in the Render dashboard.
+
+services:
+  - type: web
+    name: talentflow-ai-backend
+    runtime: python
+    plan: free
+
+    rootDir: backend
+
+    buildCommand: pip install -r requirements.txt
+
+    # Automatically apply database migrations before each deployment.
+    preDeployCommand: alembic upgrade head
+
+    startCommand: uvicorn src.main:app --host 0.0.0.0 --port $PORT
+
+    healthCheckPath: /health
+
+    envVars:
+      - key: APP_ENV
+        value: production
+
+      - key: DEBUG
+        value: "false"
+
+      - key: API_V1_PREFIX
+        value: /api/v1
+
+      - key: LOG_LEVEL
+        value: INFO
+
+      - key: JWT_ALGORITHM
+        value: HS256
+
+      - key: ACCESS_TOKEN_EXPIRE_MINUTES
+        value: "10080" # 7 days
+
+      # AI Provider (Groq - OpenAI Compatible)
+      - key: AI_PROVIDER
+        value: openai_compatible
+
+      - key: AI_BASE_URL
+        value: https://api.groq.com/openai/v1
+
+      - key: AI_MODEL
+        value: llama-3.3-70b-versatile
+
+      # Secrets (Configure in Render Dashboard)
+
+      - key: DATABASE_URL
+        sync: false
+
+      - key: JWT_SECRET_KEY
+        sync: false
+
+      - key: CORS_ORIGINS
+        sync: false
+
+      - key: AI_API_KEY
+        sync: false

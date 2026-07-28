@@ -15,7 +15,6 @@ logger = logging.getLogger("talentflow.auth")
 
 
 class AuthService:
-
     def __init__(self, db: Session):
         self.db = db
         self.repo = SqlAlchemyUserRepository(db)

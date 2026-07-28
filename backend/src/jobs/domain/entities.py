@@ -45,15 +45,19 @@ class Job(Base, UUIDPrimaryKeyMixin, TimestampMixin):
     description: Mapped[str] = mapped_column(Text, nullable=False)
     requirements: Mapped[str] = mapped_column(Text, nullable=False, default="")
     employment_type: Mapped[EmploymentType] = mapped_column(
-        Enum(EmploymentType, name="employment_type", values_callable=lambda obj: [e.value for e in obj]), nullable=False
+        Enum(EmploymentType, name="employment_type", values_callable=lambda obj: [e.value for e in obj]),
+        nullable=False,
     )
     experience_level: Mapped[ExperienceLevel] = mapped_column(
-        Enum(ExperienceLevel, name="experience_level", values_callable=lambda obj: [e.value for e in obj]), nullable=False
+        Enum(ExperienceLevel, name="experience_level", values_callable=lambda obj: [e.value for e in obj]),
+        nullable=False,
     )
     salary_min: Mapped[int | None] = mapped_column(Integer, nullable=True)
     salary_max: Mapped[int | None] = mapped_column(Integer, nullable=True)
     status: Mapped[JobStatus] = mapped_column(
-        Enum(JobStatus, name="job_status", values_callable=lambda obj: [e.value for e in obj]), nullable=False, default=JobStatus.OPEN
+        Enum(JobStatus, name="job_status", values_callable=lambda obj: [e.value for e in obj]),
+        nullable=False,
+        default=JobStatus.OPEN,
     )
     # Soft delete, per the brief's "soft deletes where appropriate".
     is_deleted: Mapped[bool] = mapped_column(default=False, nullable=False, index=True)

@@ -12,7 +12,6 @@ logger = logging.getLogger("talentflow.access")
 
 
 class RequestContextMiddleware(BaseHTTPMiddleware):
-
     async def dispatch(self, request: Request, call_next):
         request_id = request.headers.get("x-request-id", str(uuid.uuid4()))
         set_request_id(request_id)

@@ -1,5 +1,4 @@
 class AppError(Exception):
-
     code: str = "APP_ERROR"
     http_status: int = 400
 

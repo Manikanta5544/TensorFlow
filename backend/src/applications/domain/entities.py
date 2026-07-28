@@ -33,7 +33,9 @@ class Application(Base, UUIDPrimaryKeyMixin, TimestampMixin):
     cover_letter: Mapped[str] = mapped_column(Text, nullable=False, default="")
     resume_text: Mapped[str] = mapped_column(Text, nullable=False)
     status: Mapped[ApplicationStatus] = mapped_column(
-        Enum(ApplicationStatus, name="application_status", values_callable=lambda obj: [e.value for e in obj]),
+        Enum(
+            ApplicationStatus, name="application_status", values_callable=lambda obj: [e.value for e in obj]
+        ),
         nullable=False,
         default=ApplicationStatus.SUBMITTED,
     )

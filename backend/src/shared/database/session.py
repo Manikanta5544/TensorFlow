@@ -24,7 +24,6 @@ SessionLocal = sessionmaker(bind=engine, autoflush=False, autocommit=False, futu
 
 
 class Base(DeclarativeBase):
-
     pass
 
 
