@@ -8,19 +8,30 @@
   }
 
   body {
-    background-color: theme("colors.paper");
+    background-color: theme('colors.paper');
+    background-image: radial-gradient(
+      circle at 12% -10%,
+      rgba(61, 90, 254, 0.05),
+      transparent 42%
+    );
   }
 
   h1,
   h2,
   h3 {
-    font-family: theme("fontFamily.display");
-    letter-spacing: -0.01em;
+    font-family: theme('fontFamily.display');
+    letter-spacing: -0.02em;
+    font-weight: 500;
+  }
+
+  ::selection {
+    background-color: theme('colors.accent.DEFAULT');
+    color: theme('colors.paper');
   }
 
   /* Visible keyboard focus everywhere — accessibility floor. */
   :focus-visible {
-    outline: 2px solid theme("colors.accent.DEFAULT");
+    outline: 2px solid theme('colors.accent.DEFAULT');
     outline-offset: 2px;
     border-radius: 4px;
   }
@@ -34,5 +45,13 @@
       transition-duration: 0.01ms !important;
       scroll-behavior: auto !important;
     }
+  }
+}
+
+@layer components {
+  /* Small tracked-out uppercase caption — used for field labels and card
+     eyebrows so metadata reads as structure, not as decoration. */
+  .caption-label {
+    @apply text-[11px] font-semibold uppercase tracking-[0.08em] text-muted;
   }
 }

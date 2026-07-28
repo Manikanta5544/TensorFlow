@@ -1,20 +1,20 @@
-import { useState } from "react";
-import { useJobs } from "@/features/jobs/hooks/use-jobs";
-import { JobCard } from "@/features/jobs/components/JobCard";
-import { Button } from "@/shared/components/ui/Button";
-import { SelectField } from "@/shared/components/ui/primitives";
-import { TextField } from "@/shared/components/ui/TextField";
-import { EmptyState, Spinner } from "@/shared/components/ui/primitives";
-import type { EmploymentType, ExperienceLevel } from "@/shared/types";
+import { useState } from 'react'
+import { useJobs } from '@/features/jobs/hooks/use-jobs'
+import { JobCard } from '@/features/jobs/components/JobCard'
+import { Button } from '@/shared/components/ui/Button'
+import { SelectField } from '@/shared/components/ui/primitives'
+import { TextField } from '@/shared/components/ui/TextField'
+import { EmptyState, Spinner } from '@/shared/components/ui/primitives'
+import type { EmploymentType, ExperienceLevel } from '@/shared/types'
 
-const PAGE_SIZE = 9;
+const PAGE_SIZE = 9
 
 export function JobsListPage() {
-  const [search, setSearch] = useState("");
-  const [location, setLocation] = useState("");
-  const [employmentType, setEmploymentType] = useState<EmploymentType | "">("");
-  const [experienceLevel, setExperienceLevel] = useState<ExperienceLevel | "">("");
-  const [page, setPage] = useState(1);
+  const [search, setSearch] = useState('')
+  const [location, setLocation] = useState('')
+  const [employmentType, setEmploymentType] = useState<EmploymentType | ''>('')
+  const [experienceLevel, setExperienceLevel] = useState<ExperienceLevel | ''>('')
+  const [page, setPage] = useState(1)
 
   const { data, isLoading, isError, isFetching } = useJobs({
     search: search || undefined,
@@ -23,28 +23,30 @@ export function JobsListPage() {
     experience_level: experienceLevel || undefined,
     page,
     page_size: PAGE_SIZE,
-  });
+  })
 
-  const totalPages = data?.meta.total_pages ?? 0;
+  const totalPages = data?.meta.total_pages ?? 0
 
   return (
-    <div className="mx-auto max-w-5xl px-6 py-12">
-      <div className="mb-8">
-        <h1 className="font-display text-3xl text-ink">Find your next role</h1>
-        <p className="mt-1 text-sm text-muted">
-          {data?.meta.total ?? 0} open position{data?.meta.total === 1 ? "" : "s"} right now.
+    <div className="mx-auto max-w-5xl px-6 py-14">
+      <div className="mb-10 border-b border-border pb-8">
+        <h1 className="font-display text-[2.5rem] leading-[1.05] tracking-[-0.02em] text-ink">
+          Find your next role
+        </h1>
+        <p className="mt-2 text-[15px] text-muted">
+          {data?.meta.total ?? 0} open position{data?.meta.total === 1 ? '' : 's'} right now.
         </p>
       </div>
 
-      <div className="mb-8 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-5">
+      <div className="mb-10 grid grid-cols-1 gap-x-6 gap-y-4 rounded-card border border-border bg-white p-5 sm:grid-cols-2 lg:grid-cols-5">
         <div className="lg:col-span-2">
           <TextField
             label="Search"
             placeholder="Job title or keyword"
             value={search}
             onChange={(e) => {
-              setPage(1);
-              setSearch(e.target.value);
+              setPage(1)
+              setSearch(e.target.value)
             }}
           />
         </div>
@@ -53,16 +55,16 @@ export function JobsListPage() {
           placeholder="City or Remote"
           value={location}
           onChange={(e) => {
-            setPage(1);
-            setLocation(e.target.value);
+            setPage(1)
+            setLocation(e.target.value)
           }}
         />
         <SelectField
           label="Employment type"
           value={employmentType}
           onChange={(e) => {
-            setPage(1);
-            setEmploymentType(e.target.value as EmploymentType | "");
+            setPage(1)
+            setEmploymentType(e.target.value as EmploymentType | '')
           }}
         >
           <option value="">Any type</option>
@@ -75,8 +77,8 @@ export function JobsListPage() {
           label="Experience"
           value={experienceLevel}
           onChange={(e) => {
-            setPage(1);
-            setExperienceLevel(e.target.value as ExperienceLevel | "");
+            setPage(1)
+            setExperienceLevel(e.target.value as ExperienceLevel | '')
           }}
         >
           <option value="">Any level</option>
@@ -99,7 +101,7 @@ export function JobsListPage() {
       ) : data && data.jobs.length > 0 ? (
         <>
           <div
-            className={`grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 ${isFetching ? "opacity-60" : ""}`}
+            className={`grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 ${isFetching ? 'opacity-60' : ''}`}
           >
             {data.jobs.map((job) => (
               <JobCard key={job.id} job={job} />
@@ -137,5 +139,5 @@ export function JobsListPage() {
         />
       )}
     </div>
-  );
+  )
 }
