@@ -12,11 +12,8 @@ services:
     rootDir: backend
 
     buildCommand: pip install -r requirements.txt
-
-    # Automatically apply database migrations before each deployment.
-    preDeployCommand: alembic upgrade head
-
-    startCommand: uvicorn src.main:app --host 0.0.0.0 --port $PORT
+    
+    startCommand: sh -c "alembic upgrade head && uvicorn src.main:app --host 0.0.0.0 --port \$PORT"
 
     healthCheckPath: /health
 
