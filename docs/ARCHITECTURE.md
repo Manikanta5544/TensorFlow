@@ -101,7 +101,7 @@ frontend/src/
 **State model** (see ADR-003): server state lives in TanStack Query hooks (`useJobs`, `useApplicationsForJob`, ...) — caching, invalidation, and loading/error states come for free. Client state (the current user) lives in one React Context. Everything else is local `useState`.
 
 **Data flow example — posting a job with AI assist:**
-`PostJobPage` → `useGenerateJobDescription()` mutation → `POST /api/v1/ai/job-description` → response fills the `description` textarea via `setValue` (React Hook Form) → on submit, `useCreateJob()` mutation → `POST /api/v1/jobs` → on success, `queryClient.invalidateQueries(["jobs"])` so the listing page picks up the new job on next visit, and the user is navigated to the new job's detail page.
+`PostJobPage` → `useGenerateJobDescription()` mutation → `POST /api/v1/ai/job-description` → response fills the `description` textarea via `setValue` (React Hook Form) → on submit, `useCreateJob()` mutation → `POST /api/v1/jobs` → on success, `queryClient.invalidateQueries({ queryKey: ['jobs'] })` so the listing page picks up the new job on next visit, and the user is navigated to the new job's detail page.
 
 ## Why AI features are a first-class slice, not a bolted-on call
 
