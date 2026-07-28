@@ -21,7 +21,7 @@ class AIRequest(Base, UUIDPrimaryKeyMixin, TimestampMixin):
         PortableUUID(), ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True
     )
     request_type: Mapped[AIRequestType] = mapped_column(
-        Enum(AIRequestType, name="ai_request_type"), nullable=False
+        Enum(AIRequestType, name="ai_request_type", values_callable=lambda obj: [e.value for e in obj]), nullable=False
     )
     provider: Mapped[str] = mapped_column(String(50), nullable=False)
     model: Mapped[str] = mapped_column(String(100), nullable=False)

@@ -1,8 +1,8 @@
 """initial schema
 
-Revision ID: 50d70768ff09
+Revision ID: 465801bc5e98
 Revises: 
-Create Date: 2026-07-27 13:47:06.477882
+Create Date: 2026-07-28 09:49:16.083380
 
 """
 from typing import Sequence, Union
@@ -13,7 +13,7 @@ from src.shared.database.types import PortableUUID
 
 
 # revision identifiers, used by Alembic.
-revision: str = '50d70768ff09'
+revision: str = '465801bc5e98'
 down_revision: Union[str, Sequence[str], None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -26,7 +26,7 @@ def upgrade() -> None:
     sa.Column('email', sa.String(length=255), nullable=False),
     sa.Column('hashed_password', sa.String(length=255), nullable=False),
     sa.Column('full_name', sa.String(length=255), nullable=False),
-    sa.Column('role', sa.Enum('RECRUITER', 'CANDIDATE', name='user_role'), nullable=False),
+    sa.Column('role', sa.Enum('recruiter', 'candidate', name='user_role'), nullable=False),
     sa.Column('company_name', sa.String(length=255), nullable=True),
     sa.Column('is_active', sa.Boolean(), nullable=False),
     sa.Column('id', PortableUUID(), nullable=False),
@@ -37,7 +37,7 @@ def upgrade() -> None:
     op.create_index(op.f('ix_users_email'), 'users', ['email'], unique=True)
     op.create_table('ai_requests',
     sa.Column('requester_id', PortableUUID(), nullable=False),
-    sa.Column('request_type', sa.Enum('JOB_DESCRIPTION', name='ai_request_type'), nullable=False),
+    sa.Column('request_type', sa.Enum('job_description', name='ai_request_type'), nullable=False),
     sa.Column('provider', sa.String(length=50), nullable=False),
     sa.Column('model', sa.String(length=100), nullable=False),
     sa.Column('succeeded', sa.Boolean(), nullable=False),
@@ -55,11 +55,11 @@ def upgrade() -> None:
     sa.Column('location', sa.String(length=255), nullable=False),
     sa.Column('description', sa.Text(), nullable=False),
     sa.Column('requirements', sa.Text(), nullable=False),
-    sa.Column('employment_type', sa.Enum('FULL_TIME', 'PART_TIME', 'CONTRACT', 'INTERNSHIP', name='employment_type'), nullable=False),
-    sa.Column('experience_level', sa.Enum('ENTRY', 'MID', 'SENIOR', 'LEAD', name='experience_level'), nullable=False),
+    sa.Column('employment_type', sa.Enum('full_time', 'part_time', 'contract', 'internship', name='employment_type'), nullable=False),
+    sa.Column('experience_level', sa.Enum('entry', 'mid', 'senior', 'lead', name='experience_level'), nullable=False),
     sa.Column('salary_min', sa.Integer(), nullable=True),
     sa.Column('salary_max', sa.Integer(), nullable=True),
-    sa.Column('status', sa.Enum('OPEN', 'CLOSED', name='job_status'), nullable=False),
+    sa.Column('status', sa.Enum('open', 'closed', name='job_status'), nullable=False),
     sa.Column('is_deleted', sa.Boolean(), nullable=False),
     sa.Column('id', PortableUUID(), nullable=False),
     sa.Column('created_at', sa.DateTime(timezone=True), nullable=False),
@@ -77,7 +77,7 @@ def upgrade() -> None:
     sa.Column('candidate_id', PortableUUID(), nullable=False),
     sa.Column('cover_letter', sa.Text(), nullable=False),
     sa.Column('resume_text', sa.Text(), nullable=False),
-    sa.Column('status', sa.Enum('SUBMITTED', 'REVIEWED', 'REJECTED', 'ACCEPTED', name='application_status'), nullable=False),
+    sa.Column('status', sa.Enum('submitted', 'reviewed', 'rejected', 'accepted', name='application_status'), nullable=False),
     sa.Column('id', PortableUUID(), nullable=False),
     sa.Column('created_at', sa.DateTime(timezone=True), nullable=False),
     sa.Column('updated_at', sa.DateTime(timezone=True), nullable=False),
