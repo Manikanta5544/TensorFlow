@@ -9,11 +9,7 @@
 
   body {
     background-color: theme('colors.paper');
-    background-image: radial-gradient(
-      circle at 12% -10%,
-      rgba(61, 90, 254, 0.05),
-      transparent 42%
-    );
+    background-image: radial-gradient(circle at 12% -10%, rgba(61, 90, 254, 0.05), transparent 42%);
   }
 
   h1,

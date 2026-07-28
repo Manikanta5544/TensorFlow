@@ -1,25 +1,25 @@
-import { useState } from "react";
-import { useParams } from "react-router-dom";
-import { useAuth } from "@/features/auth/auth-context";
-import { useJob } from "@/features/jobs/hooks/use-jobs";
-import { ApplyModal } from "@/features/applications/components/ApplyModal";
-import { Badge } from "@/shared/components/ui/primitives";
-import { Button } from "@/shared/components/ui/Button";
-import { Spinner } from "@/shared/components/ui/primitives";
-import { formatEmploymentType, formatRelativeDate, formatSalary } from "@/shared/utils/format";
+import { useState } from 'react'
+import { useParams } from 'react-router-dom'
+import { useAuth } from '@/features/auth/auth-context'
+import { useJob } from '@/features/jobs/hooks/use-jobs'
+import { ApplyModal } from '@/features/applications/components/ApplyModal'
+import { Badge } from '@/shared/components/ui/primitives'
+import { Button } from '@/shared/components/ui/Button'
+import { Spinner } from '@/shared/components/ui/primitives'
+import { formatEmploymentType, formatRelativeDate, formatSalary } from '@/shared/utils/format'
 
 export function JobDetailPage() {
-  const { jobId } = useParams<{ jobId: string }>();
-  const { user } = useAuth();
-  const { data: job, isLoading, isError } = useJob(jobId);
-  const [showApply, setShowApply] = useState(false);
+  const { jobId } = useParams<{ jobId: string }>()
+  const { user } = useAuth()
+  const { data: job, isLoading, isError } = useJob(jobId)
+  const [showApply, setShowApply] = useState(false)
 
   if (isLoading) {
     return (
       <div className="flex justify-center py-24">
         <Spinner />
       </div>
-    );
+    )
   }
 
   if (isError || !job) {
@@ -28,10 +28,10 @@ export function JobDetailPage() {
         <p className="font-display text-xl text-ink">Job not found</p>
         <p className="mt-1 text-sm text-muted">It may have been closed or removed.</p>
       </div>
-    );
+    )
   }
 
-  const canApply = user?.role === "candidate";
+  const canApply = user?.role === 'candidate'
 
   return (
     <div className="mx-auto max-w-3xl px-6 py-12">
@@ -61,24 +61,30 @@ export function JobDetailPage() {
         <p className="mt-6 text-sm text-muted">
           <a href="/login" className="font-medium text-accent hover:underline">
             Sign in
-          </a>{" "}
+          </a>{' '}
           as a candidate to apply.
         </p>
       )}
 
       <section className="mt-10">
         <h2 className="font-display text-lg text-ink">About the role</h2>
-        <p className="mt-2 whitespace-pre-wrap text-sm leading-relaxed text-ink/80">{job.description}</p>
+        <p className="mt-2 whitespace-pre-wrap text-sm leading-relaxed text-ink/80">
+          {job.description}
+        </p>
       </section>
 
       {job.requirements && (
         <section className="mt-8">
           <h2 className="font-display text-lg text-ink">Requirements</h2>
-          <p className="mt-2 whitespace-pre-wrap text-sm leading-relaxed text-ink/80">{job.requirements}</p>
+          <p className="mt-2 whitespace-pre-wrap text-sm leading-relaxed text-ink/80">
+            {job.requirements}
+          </p>
         </section>
       )}
 
-      {showApply && <ApplyModal jobId={job.id} jobTitle={job.title} onClose={() => setShowApply(false)} />}
+      {showApply && (
+        <ApplyModal jobId={job.id} jobTitle={job.title} onClose={() => setShowApply(false)} />
+      )}
     </div>
-  );
+  )
 }

@@ -1,33 +1,33 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { useApplyToJob } from "@/features/applications/hooks/use-applications";
-import { Button } from "@/shared/components/ui/Button";
-import { TextAreaField } from "@/shared/components/ui/TextField";
-import { getApiErrorMessage } from "@/shared/lib/api-client";
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
+import { useApplyToJob } from '@/features/applications/hooks/use-applications'
+import { Button } from '@/shared/components/ui/Button'
+import { TextAreaField } from '@/shared/components/ui/TextField'
+import { getApiErrorMessage } from '@/shared/lib/api-client'
 
 const applySchema = z.object({
-  cover_letter: z.string().max(5000).optional().default(""),
-  resume_text: z.string().min(20, "Add a bit more detail — at least 20 characters."),
-});
-type ApplyFormValues = z.infer<typeof applySchema>;
+  cover_letter: z.string().max(5000).optional().default(''),
+  resume_text: z.string().min(20, 'Add a bit more detail — at least 20 characters.'),
+})
+type ApplyFormValues = z.infer<typeof applySchema>
 
 export function ApplyModal({
   jobTitle,
   onClose,
   jobId,
 }: {
-  jobTitle: string;
-  jobId: string;
-  onClose: () => void;
+  jobTitle: string
+  jobId: string
+  onClose: () => void
 }) {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<ApplyFormValues>({ resolver: zodResolver(applySchema) });
+  } = useForm<ApplyFormValues>({ resolver: zodResolver(applySchema) })
 
-  const mutation = useApplyToJob();
+  const mutation = useApplyToJob()
 
   if (mutation.isSuccess) {
     return (
@@ -45,7 +45,7 @@ export function ApplyModal({
           </Button>
         </div>
       </div>
-    );
+    )
   }
 
   return (
@@ -76,19 +76,19 @@ export function ApplyModal({
             rows={5}
             placeholder="Paste a summary of your experience, skills, and relevant background."
             error={errors.resume_text?.message}
-            {...register("resume_text")}
+            {...register('resume_text')}
           />
           <TextAreaField
             label="Cover letter (optional)"
             rows={4}
             placeholder="Why this role, why you?"
             error={errors.cover_letter?.message}
-            {...register("cover_letter")}
+            {...register('cover_letter')}
           />
 
           {mutation.isError && (
             <p className="rounded-lg bg-danger-soft px-3.5 py-2.5 text-sm text-danger">
-              {getApiErrorMessage(mutation.error, "Unable to submit your application.")}
+              {getApiErrorMessage(mutation.error, 'Unable to submit your application.')}
             </p>
           )}
 
@@ -103,5 +103,5 @@ export function ApplyModal({
         </form>
       </div>
     </div>
-  );
+  )
 }

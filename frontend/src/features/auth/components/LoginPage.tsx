@@ -1,55 +1,58 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "@tanstack/react-query";
-import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
-import { loginRequest } from "@/features/auth/api/auth-api";
-import { useAuth } from "@/features/auth/auth-context";
-import { loginSchema, type LoginFormValues } from "@/features/auth/types/schemas";
-import { Button } from "@/shared/components/ui/Button";
-import { TextField } from "@/shared/components/ui/TextField";
-import { getApiErrorMessage } from "@/shared/lib/api-client";
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useMutation } from '@tanstack/react-query'
+import { useForm } from 'react-hook-form'
+import { Link, useNavigate } from 'react-router-dom'
+import { loginRequest } from '@/features/auth/api/auth-api'
+import { useAuth } from '@/features/auth/auth-context'
+import { loginSchema, type LoginFormValues } from '@/features/auth/types/schemas'
+import { Button } from '@/shared/components/ui/Button'
+import { TextField } from '@/shared/components/ui/TextField'
+import { getApiErrorMessage } from '@/shared/lib/api-client'
 
 export function LoginPage() {
-  const navigate = useNavigate();
-  const { login } = useAuth();
+  const navigate = useNavigate()
+  const { login } = useAuth()
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<LoginFormValues>({ resolver: zodResolver(loginSchema) });
+  } = useForm<LoginFormValues>({ resolver: zodResolver(loginSchema) })
 
   const mutation = useMutation({
     mutationFn: loginRequest,
     onSuccess: (data) => {
-      login(data.access_token, data.user);
-      navigate(data.user.role === "recruiter" ? "/dashboard" : "/jobs");
+      login(data.access_token, data.user)
+      navigate(data.user.role === 'recruiter' ? '/dashboard' : '/jobs')
     },
-  });
+  })
 
   return (
     <div className="mx-auto flex min-h-[calc(100vh-64px)] max-w-md flex-col justify-center px-6 py-16">
       <h1 className="font-display text-3xl text-ink">Welcome back</h1>
       <p className="mt-2 text-sm text-muted">Sign in to continue to TensorFlow AI.</p>
 
-      <form onSubmit={handleSubmit((values) => mutation.mutate(values))} className="mt-8 flex flex-col gap-4">
+      <form
+        onSubmit={handleSubmit((values) => mutation.mutate(values))}
+        className="mt-8 flex flex-col gap-4"
+      >
         <TextField
           label="Email"
           type="email"
           autoComplete="email"
           error={errors.email?.message}
-          {...register("email")}
+          {...register('email')}
         />
         <TextField
           label="Password"
           type="password"
           autoComplete="current-password"
           error={errors.password?.message}
-          {...register("password")}
+          {...register('password')}
         />
 
         {mutation.isError && (
           <p className="rounded-lg bg-danger-soft px-3.5 py-2.5 text-sm text-danger">
-            {getApiErrorMessage(mutation.error, "Unable to sign in.")}
+            {getApiErrorMessage(mutation.error, 'Unable to sign in.')}
           </p>
         )}
 
@@ -59,7 +62,7 @@ export function LoginPage() {
       </form>
 
       <p className="mt-6 text-center text-sm text-muted">
-        New to TensorFlow AI?{" "}
+        New to TensorFlow AI?{' '}
         <Link to="/register" className="font-medium text-accent hover:underline">
           Create an account
         </Link>
@@ -72,5 +75,5 @@ export function LoginPage() {
         <p>Password: DemoPass123!</p>
       </div>
     </div>
-  );
+  )
 }

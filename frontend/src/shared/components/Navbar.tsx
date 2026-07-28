@@ -4,10 +4,7 @@ import { useAuth } from '@/features/auth/auth-context'
 import { Button } from '@/shared/components/ui/Button'
 
 const navLinkClass = ({ isActive }: { isActive: boolean }) =>
-  clsx(
-    'text-sm transition-colors',
-    isActive ? 'text-ink' : 'text-ink/60 hover:text-ink',
-  )
+  clsx('text-sm transition-colors', isActive ? 'text-ink' : 'text-ink/60 hover:text-ink')
 
 export function Navbar() {
   const { user, logout } = useAuth()

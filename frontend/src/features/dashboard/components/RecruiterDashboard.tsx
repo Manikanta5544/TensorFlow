@@ -1,32 +1,37 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import {
   useApplicationsForJob,
   useUpdateApplicationStatus,
-} from "@/features/applications/hooks/use-applications";
-import { useMyJobs } from "@/features/jobs/hooks/use-jobs";
-import { Badge, Card, EmptyState, Spinner } from "@/shared/components/ui/primitives";
-import { Button } from "@/shared/components/ui/Button";
-import type { ApplicationStatus } from "@/shared/types";
-import { formatRelativeDate } from "@/shared/utils/format";
+} from '@/features/applications/hooks/use-applications'
+import { useMyJobs } from '@/features/jobs/hooks/use-jobs'
+import { Badge, Card, EmptyState, Spinner } from '@/shared/components/ui/primitives'
+import { Button } from '@/shared/components/ui/Button'
+import type { ApplicationStatus } from '@/shared/types'
+import { formatRelativeDate } from '@/shared/utils/format'
 
-const STATUS_OPTIONS: ApplicationStatus[] = ["submitted", "reviewed", "accepted", "rejected"];
+const STATUS_OPTIONS: ApplicationStatus[] = ['submitted', 'reviewed', 'accepted', 'rejected']
 
 function ApplicantsPanel({ jobId }: { jobId: string }) {
-  const { data: applications, isLoading } = useApplicationsForJob(jobId);
-  const updateStatus = useUpdateApplicationStatus(jobId);
+  const { data: applications, isLoading } = useApplicationsForJob(jobId)
+  const updateStatus = useUpdateApplicationStatus(jobId)
 
-  if (isLoading) return <Spinner className="my-4" />;
+  if (isLoading) return <Spinner className="my-4" />
   if (!applications || applications.length === 0) {
-    return <p className="py-4 text-sm text-muted">No applications yet.</p>;
+    return <p className="py-4 text-sm text-muted">No applications yet.</p>
   }
 
   return (
     <div className="flex flex-col divide-y divide-border">
       {applications.map((app) => (
-        <div key={app.id} className="flex flex-col gap-2 py-4 sm:flex-row sm:items-start sm:justify-between">
+        <div
+          key={app.id}
+          className="flex flex-col gap-2 py-4 sm:flex-row sm:items-start sm:justify-between"
+        >
           <div className="max-w-md">
-            <p className="text-sm font-medium text-ink">Applied {formatRelativeDate(app.created_at)}</p>
+            <p className="text-sm font-medium text-ink">
+              Applied {formatRelativeDate(app.created_at)}
+            </p>
             {app.cover_letter && <p className="mt-1 text-sm text-ink/80">{app.cover_letter}</p>}
             <p className="mt-1 text-xs text-muted">{app.resume_text}</p>
           </div>
@@ -35,7 +40,10 @@ function ApplicantsPanel({ jobId }: { jobId: string }) {
             <select
               value={app.status}
               onChange={(e) =>
-                updateStatus.mutate({ applicationId: app.id, status: e.target.value as ApplicationStatus })
+                updateStatus.mutate({
+                  applicationId: app.id,
+                  status: e.target.value as ApplicationStatus,
+                })
               }
               className="rounded-lg border border-border bg-white px-2 py-1 text-xs focus:outline-none focus:ring-2 focus:ring-accent/40"
             >
@@ -49,12 +57,12 @@ function ApplicantsPanel({ jobId }: { jobId: string }) {
         </div>
       ))}
     </div>
-  );
+  )
 }
 
 export function RecruiterDashboard() {
-  const { data: jobs, isLoading } = useMyJobs();
-  const [expandedJobId, setExpandedJobId] = useState<string | null>(null);
+  const { data: jobs, isLoading } = useMyJobs()
+  const [expandedJobId, setExpandedJobId] = useState<string | null>(null)
 
   return (
     <div className="mx-auto max-w-4xl px-6 py-12">
@@ -93,7 +101,7 @@ export function RecruiterDashboard() {
                 </div>
                 <div className="flex items-center gap-3">
                   <Badge status={job.status}>{job.status}</Badge>
-                  <span className="text-muted">{expandedJobId === job.id ? "−" : "+"}</span>
+                  <span className="text-muted">{expandedJobId === job.id ? '−' : '+'}</span>
                 </div>
               </button>
               {expandedJobId === job.id && <ApplicantsPanel jobId={job.id} />}
@@ -102,5 +110,5 @@ export function RecruiterDashboard() {
         </div>
       )}
     </div>
-  );
+  )
 }

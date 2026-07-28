@@ -19,7 +19,9 @@ export function JobCard({ job }: { job: Job }) {
         <p className="mt-3 line-clamp-2 text-sm text-ink/70">{job.description}</p>
 
         <div className="mt-4 flex items-center justify-between border-t border-border pt-3 text-xs text-muted">
-          <span className="font-mono text-ink/80">{formatSalary(job.salary_min, job.salary_max)}</span>
+          <span className="font-mono text-ink/80">
+            {formatSalary(job.salary_min, job.salary_max)}
+          </span>
           <span>{formatRelativeDate(job.created_at)}</span>
         </div>
       </Card>
