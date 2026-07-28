@@ -48,20 +48,15 @@ jobs:
 
       - name: Run tests with coverage
         env:
-          APP_ENV: test
-          JWT_SECRET_KEY: ci-test-secret-key-not-for-production-use-only-32chars
-          DATABASE_URL: sqlite:///:memory:
-          CORS_ORIGINS: http://localhost:5173
-          AI_PROVIDER: mock
-          AI_BASE_URL: https://api.groq.com/openai/v1
-          AI_MODEL: llama-3.3-70b-versatile
-          LOG_LEVEL: WARNING
-        run: |
-          pytest \
-            --cov=src \
-            --cov-report=term-missing \
-            --cov-report=xml \
-            -q
+          APP_ENV: "test"
+          JWT_SECRET_KEY: "ci-test-secret-key-not-for-production-use-only-32chars"
+          DATABASE_URL: "sqlite:///:memory:"
+          CORS_ORIGINS: "http://localhost:5173"
+          AI_PROVIDER: "mock"
+          AI_BASE_URL: "https://api.groq.com/openai/v1"
+          AI_MODEL: "llama-3.3-70b-versatile"
+          LOG_LEVEL: "WARNING"
+        run: pytest --cov=src --cov-report=term-missing --cov-report=xml -q
 
       - name: Upload coverage report
         uses: actions/upload-artifact@v4
