@@ -27,7 +27,7 @@ settings = get_settings()
 # the connection string in alembic.ini.
 config.set_main_option(
     "sqlalchemy.url",
-    settings.DATABASE_URL,
+    settings.DATABASE_URL.replace("%", "%%"),  # Escape % for alembic.ini
 )
 
 # Metadata used for autogeneration.
