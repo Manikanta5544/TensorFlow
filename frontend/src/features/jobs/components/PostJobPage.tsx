@@ -1,6 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 import { useGenerateJobDescription } from "@/features/ai/api/ai-api";
@@ -35,7 +35,8 @@ export function PostJobPage() {
   const {
     register,
     handleSubmit,
-    watch,
+    control,
+    getValues,
     setValue,
     formState: { errors },
   } = useForm<PostJobFormValues>({
@@ -43,22 +44,27 @@ export function PostJobPage() {
     defaultValues: { employment_type: "full_time", experience_level: "mid" },
   });
 
+  const watchedTitle = useWatch({ control, name: "title" });
   const createJobMutation = useCreateJob();
   const generateMutation = useGenerateJobDescription();
 
   async function handleGenerate() {
-    const title = watch("title");
-    const level = watch("experience_level");
+    const title = getValues("title");
+    const level = getValues("experience_level");
+
     if (!title) return;
+
     const skills = skillsInput
       .split(",")
       .map((s) => s.trim())
       .filter(Boolean);
+
     const text = await generateMutation.mutateAsync({
       role_title: title,
       experience_level: level,
       key_skills: skills.length ? skills : [title],
     });
+
     setValue("description", text, { shouldValidate: true });
   }
 
@@ -135,7 +141,7 @@ export function PostJobPage() {
               type="button"
               variant="secondary"
               isLoading={generateMutation.isPending}
-              disabled={!watch("title")}
+              disabled={!watchedTitle}
               onClick={handleGenerate}
             >
               Generate description
