@@ -78,7 +78,7 @@ def test_another_recruiter_cannot_update_someone_elses_job(client, recruiter_hea
     other = client.post(
         "/api/v1/auth/register",
         json={
-            "email": "other.recruiter@talentflow.example.com",
+            "email": "other.recruiter@tensorflow.example.com",
             "password": "SecurePass123!",
             "full_name": "Other Recruiter",
             "role": "recruiter",

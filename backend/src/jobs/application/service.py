@@ -8,7 +8,7 @@ from src.jobs.domain.repository import JobFilters
 from src.jobs.infrastructure.repository_impl import SqlAlchemyJobRepository
 from src.shared.exceptions.exceptions import ForbiddenError, NotFoundError
 
-logger = logging.getLogger("talentflow.jobs")
+logger = logging.getLogger("tensorflow.jobs")
 
 
 class JobService:

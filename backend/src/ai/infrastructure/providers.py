@@ -5,7 +5,7 @@ import httpx
 from src.ai.domain.provider import CompletionRequest, CompletionResult, LLMProvider
 from src.shared.exceptions.exceptions import AppError
 
-logger = logging.getLogger("talentflow.ai")
+logger = logging.getLogger("tensorflow.ai")
 
 
 class MockLLMProvider(LLMProvider):

@@ -14,7 +14,7 @@ class Settings(BaseSettings):
     )
 
     # --- App ---
-    APP_NAME: str = "TalentFlow AI"
+    APP_NAME: str = "TensorFlow AI"
     APP_ENV: Literal["development", "test", "production"] = "development"
     DEBUG: bool = False
     API_V1_PREFIX: str = "/api/v1"

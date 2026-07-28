@@ -26,7 +26,7 @@ export function Navbar() {
             T
           </span>
           <span className="font-display text-[17px] leading-none text-ink">
-            TalentFlow<span className="text-accent"> AI</span>
+            TensorFlow<span className="text-accent"> AI</span>
           </span>
         </Link>
 

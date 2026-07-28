@@ -7,7 +7,7 @@ from src.ai.application.prompts import build_job_description_prompt
 from src.ai.domain.entities import AIRequest, AIRequestType
 from src.ai.infrastructure.factory import get_llm_provider
 
-logger = logging.getLogger("talentflow.ai")
+logger = logging.getLogger("tensorflow.ai")
 
 
 class AIService:

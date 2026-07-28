@@ -8,7 +8,7 @@ from src.applications.infrastructure.repository_impl import SqlAlchemyApplicatio
 from src.jobs.application.service import JobService
 from src.shared.exceptions.exceptions import ConflictError, ForbiddenError, NotFoundError
 
-logger = logging.getLogger("talentflow.applications")
+logger = logging.getLogger("tensorflow.applications")
 
 
 class ApplicationService:

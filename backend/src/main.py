@@ -20,7 +20,7 @@ from src.shared.responses.envelope import fail
 
 settings = get_settings()
 configure_logging(settings.LOG_LEVEL)
-logger = logging.getLogger("talentflow.main")
+logger = logging.getLogger("tensorflow.main")
 
 
 def create_app() -> FastAPI:

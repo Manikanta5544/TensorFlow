@@ -5,7 +5,7 @@ const baseURL = import.meta.env.VITE_API_URL ? `${import.meta.env.VITE_API_URL}/
 export const apiClient = axios.create({ baseURL });
 
 apiClient.interceptors.request.use((config) => {
-  const token = localStorage.getItem("talentflow_token");
+  const token = localStorage.getItem("tensorflow_token");
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }

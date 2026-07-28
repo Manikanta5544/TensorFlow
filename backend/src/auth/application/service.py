@@ -11,7 +11,7 @@ from src.shared.security.security import (
     verify_password,
 )
 
-logger = logging.getLogger("talentflow.auth")
+logger = logging.getLogger("tensorflow.auth")
 
 
 class AuthService:

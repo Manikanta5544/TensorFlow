@@ -29,7 +29,7 @@ export function LoginPage() {
   return (
     <div className="mx-auto flex min-h-[calc(100vh-64px)] max-w-md flex-col justify-center px-6 py-16">
       <h1 className="font-display text-3xl text-ink">Welcome back</h1>
-      <p className="mt-2 text-sm text-muted">Sign in to continue to TalentFlow AI.</p>
+      <p className="mt-2 text-sm text-muted">Sign in to continue to TensorFlow AI.</p>
 
       <form onSubmit={handleSubmit((values) => mutation.mutate(values))} className="mt-8 flex flex-col gap-4">
         <TextField
@@ -59,7 +59,7 @@ export function LoginPage() {
       </form>
 
       <p className="mt-6 text-center text-sm text-muted">
-        New to TalentFlow AI?{" "}
+        New to TensorFlow AI?{" "}
         <Link to="/register" className="font-medium text-accent hover:underline">
           Create an account
         </Link>
@@ -67,8 +67,8 @@ export function LoginPage() {
 
       <div className="mt-10 rounded-lg border border-border bg-white p-4 text-xs text-muted">
         <p className="font-medium text-ink">Demo accounts (after seeding)</p>
-        <p className="mt-1">Recruiter: recruiter1@talentflow.example.com</p>
-        <p>Candidate: candidate1@talentflow.example.com</p>
+        <p className="mt-1">Recruiter: recruiter1@tensorflow.example.com</p>
+        <p>Candidate: candidate1@tensorflow.example.com</p>
         <p>Password: DemoPass123!</p>
       </div>
     </div>

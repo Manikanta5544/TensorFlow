@@ -57,7 +57,7 @@ CANDIDATE_NAMES = [
     "Ishita Rao",
 ]
 
-SEED_MARKER_EMAIL = "seed.marker@talentflow.example.com"
+SEED_MARKER_EMAIL = "seed.marker@tensorflow.example.com"
 
 
 def run() -> None:
@@ -71,7 +71,7 @@ def run() -> None:
         recruiters: list[User] = []
         for i, company in enumerate(COMPANIES):
             recruiter = User(
-                email=f"recruiter{i+1}@talentflow.example.com",
+                email=f"recruiter{i+1}@tensorflow.example.com",
                 hashed_password=hash_password("DemoPass123!"),
                 full_name=f"Recruiter {i+1}",
                 role=UserRole.RECRUITER,
@@ -84,7 +84,7 @@ def run() -> None:
         candidates: list[User] = []
         for i, name in enumerate(CANDIDATE_NAMES):
             candidate = User(
-                email=f"candidate{i+1}@talentflow.example.com",
+                email=f"candidate{i+1}@tensorflow.example.com",
                 hashed_password=hash_password("DemoPass123!"),
                 full_name=name,
                 role=UserRole.CANDIDATE,
@@ -154,8 +154,8 @@ def run() -> None:
             f"{len(jobs)} jobs, {applications_created} applications."
         )
         print("Demo login (any seeded account): password is 'DemoPass123!'")
-        print("  Recruiter: recruiter1@talentflow.example.com")
-        print("  Candidate: candidate1@talentflow.example.com")
+        print("  Recruiter: recruiter1@tensorflow.example.com")
+        print("  Candidate: candidate1@tensorflow.example.com")
     finally:
         db.close()
 

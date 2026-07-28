@@ -60,7 +60,7 @@ def recruiter_headers(client):
     client.post(
         "/api/v1/auth/register",
         json={
-            "email": "recruiter@talentflow.example.com",
+            "email": "recruiter@tensorflow.example.com",
             "password": "SecurePass123!",
             "full_name": "Rita Recruiter",
             "role": "recruiter",
@@ -69,7 +69,7 @@ def recruiter_headers(client):
     )
     resp = client.post(
         "/api/v1/auth/login",
-        json={"email": "recruiter@talentflow.example.com", "password": "SecurePass123!"},
+        json={"email": "recruiter@tensorflow.example.com", "password": "SecurePass123!"},
     )
     token = resp.json()["data"]["access_token"]
     return {"Authorization": f"Bearer {token}"}
@@ -80,7 +80,7 @@ def candidate_headers(client):
     client.post(
         "/api/v1/auth/register",
         json={
-            "email": "candidate@talentflow.example.com",
+            "email": "candidate@tensorflow.example.com",
             "password": "SecurePass123!",
             "full_name": "Cody Candidate",
             "role": "candidate",
@@ -88,7 +88,7 @@ def candidate_headers(client):
     )
     resp = client.post(
         "/api/v1/auth/login",
-        json={"email": "candidate@talentflow.example.com", "password": "SecurePass123!"},
+        json={"email": "candidate@tensorflow.example.com", "password": "SecurePass123!"},
     )
     token = resp.json()["data"]["access_token"]
     return {"Authorization": f"Bearer {token}"}

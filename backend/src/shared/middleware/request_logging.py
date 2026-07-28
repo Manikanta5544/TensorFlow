@@ -8,7 +8,7 @@ from starlette.responses import Response
 
 from src.shared.middleware.request_context import set_request_id
 
-logger = logging.getLogger("talentflow.access")
+logger = logging.getLogger("tensorflow.access")
 
 
 class RequestContextMiddleware(BaseHTTPMiddleware):
